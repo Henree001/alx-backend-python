@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """This module defines the function to_kv."""
-from typing import Tuple
+from typing import Tuple, Union
 
 
-def to_kv(k: str, v: int | float) -> Tuple[str, float]:
+def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     """
     This function accepts a string and an int or float as its
     two arguments and returns a Tuple with first and second

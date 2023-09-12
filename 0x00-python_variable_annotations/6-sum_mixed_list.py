@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """This module defines the function sum_mixed_list."""
 from typing import List
 
