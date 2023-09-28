@@ -12,4 +12,4 @@ async def async_comprehension() -> List[float]:
     'async_generator'.
     """
 
-    return [await i for i in async_generator()]
+    return [await i async for i in async_generator()]
