@@ -27,7 +27,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ("random-url", {'repos_url': 'http://some_url.com'})
     ])
     def test_public_repos_url(self, name, result, mock_json):
-        """ Test method to test _public_repos_method in GithubOrgClient"""
+        """Test method to test _public_repos_method in GithubOrgClient"""
         mock_json.return_value = {'repos_url': 'http://some_url.com'}
         with patch('client.GithubOrgClient.org',
                    PropertyMock(return_value=result)):
@@ -36,7 +36,7 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch('client.get_json')
     def test_public_repos(self, mock_json):
-        """Unit-test GithubOrgClient.public_repos"""
+        """Test method to test GithubOrgClient.public_repos"""
         payload = [{
             "name": "repo1",
             "license": {"key": "GPL-3.0"}
