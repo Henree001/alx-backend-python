@@ -27,7 +27,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ("random-url", {'repos_url': 'http://some_url.com'})
     ])
     def test_public_repos_url(self, name, result, mock_json):
-        """ Test method returns correct output """
+        """ Test method to test _public_repos_method in GithubOrgClient"""
         mock_json.return_value = {'repos_url': 'http://some_url.com'}
         with patch('client.GithubOrgClient.org',
                    PropertyMock(return_value=result)):
@@ -39,11 +39,11 @@ class TestGithubOrgClient(unittest.TestCase):
         """Unit-test GithubOrgClient.public_repos"""
         payload = [{
             "name": "repo1",
-            "html_url": "https://github.com/org/repo1"
+            "license": {"key": "GPL-3.0"}
             },
             {
             "name": "repo2",
-            "html_url": "https://github.com/org/repo2"
+            "license": {"key": "MIT"}
             }]
         mock_json.return_value = payload
         with patch("client.GithubOrgClient._public_repos_url",
@@ -51,8 +51,8 @@ class TestGithubOrgClient(unittest.TestCase):
                        return_value="https://github.com/org/repos"
                        )) as mock_public_repos_url:
             instance = GithubOrgClient('org')
-            repos = instance.public_repos()
-            self.assertEqual(repos, payload)
+            repos = instance.public_repos(license="MIT")
+            self.assertEqual(repos, ['repo2'])
             mock_json.assert_called_once()
             mock_public_repos_url.assert_called_once()
 
