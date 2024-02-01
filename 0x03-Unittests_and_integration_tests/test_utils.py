@@ -45,17 +45,21 @@ class TestGetJson(unittest.TestCase):
 
 class TestMemoize(unittest.TestCase):
     """Class for testing memoization"""
-    class TestClass:
-        """ Test class"""
-        def a_method(self):
-            return 42
 
-        @memoize
-        def a_property(self):
-            return self.a_method()
+     def test_memoize(self):
+        """ Tests memoize function """
+        class TestClass:
+            """ Test class"""
+            def a_method(self):
+                """ Method to always return 42 """
+                return 42
 
-    with patch.object(TestClass, 'a_method', return_value=42) as mocked:
-        test_case = TestClass()
-        test_case.a_property
-        test_case.a_property
-        mocked.asset_called_once()
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method', return_value=42) as mocked:
+            test_case = TestClass()
+            test_case.a_property
+            test_case.a_property
+            mocked.asset_called_once()
